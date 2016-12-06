@@ -15,6 +15,11 @@ private:
 public:
     // Constructors
     room();
+    /// <summary>
+    /// Standard room constructor
+    /// </summary>
+    /// <param name="t">Flavortext to display to the user</param>
+    /// <param name="e">boolean array of 4 exits</param>
     room(std::string t, bool e[4]);
 
     // Getters
