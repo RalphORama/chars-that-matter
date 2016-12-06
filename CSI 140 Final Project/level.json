@@ -1,9 +1,11 @@
 {
   "room01": {
     "ftext": "This is the first room.",
-    "e_north": true,
-    "e_east": true,
-    "e_south": true,
-    "e_west": false
+    "exits": {
+      "n": true,
+      "e": true,
+      "s": true,
+      "w": false
+    }
   }
 }

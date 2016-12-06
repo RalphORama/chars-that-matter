@@ -3,9 +3,14 @@
 #include <fstream>
 #include "json.hpp"
 
+/// <summary>
+/// Removes all instances of the " character from a string.
+/// Source: http://stackoverflow.com/a/5674399
+/// </summary>
+/// <param name="str">String to strip quotes from.</param>
 #include "room.h"
 
-void setupLevel(room**, int, int);
+void stripQuotes(std::string&);
 
 using namespace std;
 using json = nlohmann::json;
@@ -19,12 +24,15 @@ int main(void)
     json levelJSON;
     levelFile >> levelJSON;
 
-    cout << levelJSON["room01"]["ftext"] << endl;
+    string flavText = levelJSON["room01"]["ftext"];
+    stripQuotes(flavText);
+    cout << flavText << endl;
+    cout << levelJSON["room01"]["exits"]["e"] << endl;
 
     // room level[LEVEL_WIDTH][LEVEL_HEIGHT];
 }
 
-void setupLevel(room** level, int w, int h)
+void stripQuotes(std::string &str)
 {
-    //level[0][0] = room("Flavor test", { false, true, true, false });
+    str.erase(remove(str.begin(), str.end(), '\"'), str.end());
 }
