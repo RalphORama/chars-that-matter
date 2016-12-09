@@ -43,6 +43,14 @@ namespace interpreter
             }
 
         }
+        else if (input == "help")
+        {
+            return 'h';
+        }
+        else if (input == "take")
+        {
+            return 't';
+        }
         else
         {
             // A space indicates an error interpreting user input, I dunno

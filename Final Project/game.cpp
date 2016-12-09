@@ -19,14 +19,14 @@ int main(void)
     ifstream levelFile(LEVEL_FILE_NAME);
     json levelJSON;
     room dungeon[LEVEL_WIDTH][LEVEL_HEIGHT];
-    string playerName;
+    string playerName, lastInput;
 	int numrooms;
 
     // Import our level data into our JSON object
     levelFile >> levelJSON;
     levelFile.close();
 
-    // TODO: Generate rooms in dungeon[5][5].
+    // BEGIN LEVEL GENERATION CODE
     numrooms = levelJSON["numrooms"];
     for (int i = 0; i < numrooms; i++)
     {
@@ -46,6 +46,7 @@ int main(void)
             levelJSON[currentRoom]["south"], levelJSON[currentRoom]["west"],
             levelJSON[currentRoom]["toodark"]);
     }
+    // END LEVEL GENERATION CODE
 
     // Create our player
     player ply(levelJSON["player"]["x"], levelJSON["player"]["y"], "", 
