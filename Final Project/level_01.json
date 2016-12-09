@@ -1,0 +1,149 @@
+{
+  "winroom": {
+    "x": 4,
+    "y": 4
+  },
+  "player": {
+    "x": 3,
+    "y": 2,
+    "hastorch": false
+  },
+  "room_01": {
+    "x": 0,
+    "y": 1,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "north": false,
+    "east": false,
+    "south": true,
+    "west": false,
+    "toodark": true
+  },
+  "room_02": {
+    "x": 0,
+    "y": 3,
+    "flavortext": "You enter a room that is surprisingly clean, given its surroundings.",
+    "north": false,
+    "east": false,
+    "south": true,
+    "west": false
+  },
+  "room_03": {
+    "x": 1,
+    "y": 1,
+    "flavortext": "As you pass through the passageway into the room, you are confronted by the smell of mold.",
+    "north": true,
+    "east": true,
+    "south": false,
+    "west": false
+  },
+  "room_04": {
+    "x": 1,
+    "y": 2,
+    "flavortext": "An empty room lit only by a massive fireplace in the north wall.",
+    "north": false,
+    "east": true,
+    "south": true,
+    "west": true
+  },
+  "room_05": {
+    "x": 1,
+    "y": 3,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "toodark": true,
+    "north": true,
+    "east": false,
+    "south": true,
+    "west": false
+  },
+  "room_06": {
+    "x": 2,
+    "y": 1,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "toodark": true,
+    "north": false,
+    "east": true,
+    "south": true,
+    "west": false
+  },
+  "room_07": {
+    "x": 2,
+    "y": 2,
+    "flavortext": "A TORCH flickers on the wall, providing light for the room.",
+    "north": true,
+    "east": false,
+    "south": false,
+    "west": true
+  },
+  "room_08": {
+    "x": 2,
+    "y": 3,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "north": false,
+    "east": false,
+    "south": true,
+    "west": false
+  },
+  "room_09": {
+    "x": 3,
+    "y": 0,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "north": false,
+    "east": true,
+    "south": false,
+    "west": false
+  },
+  "room_10": {
+    "x": 3,
+    "y": 1,
+    "flavortext": "An empty room, much like the others you've already seen.",
+    "north": true,
+    "east": true,
+    "south": false,
+    "west": true
+  },
+  "room_11": {
+    "x": 3,
+    "y": 2,
+    "flavortext": "The room you worke up in. Not much has changed.",
+    "north": false,
+    "east": true,
+    "south": true,
+    "west": true
+  },
+  "room_12": {
+    "x": 3,
+    "y": 3,
+    "flavortext": "This room appears to have been sealed off for ages. It's completely empty, not even a cobweb in a corner.",
+    "north": true,
+    "east": false,
+    "south": false,
+    "west": true
+  },
+  "room_13": {
+    "x": 4,
+    "y": 2,
+    "flavortext": "An empty room. The stone walls are covered in moss.",
+    "north": true,
+    "east": true,
+    "south": false,
+    "west": false
+  },
+  "room_14": {
+    "x": 4,
+    "y": 3,
+    "flavortext": "The room reeks. Upon further inspection, it's because of a rotting corpse in the corner.",
+    "north": false,
+    "east": true,
+    "south": false,
+    "west": true
+  },
+  "room_15": {
+    "x": 4,
+    "y": 4,
+    "flavortext": "As you emerge from the passageway, you're temporarily blinded by sunlight shining down a stairwell. You proceed upwards, onto new journeys.",
+    "north": false,
+    "east": false,
+    "south": false,
+    "west": true
+  }
+}

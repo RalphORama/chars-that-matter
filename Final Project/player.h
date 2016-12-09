@@ -5,8 +5,8 @@ class player {
 public:
     int x, y;
     std::string name;
-    bool dead;
+    bool hasTorch, dead;
 
 public:
-    player(int pos_x, int pos_y, std::string n, bool d = false);
+    player(int pos_x, int pos_y, std::string n, bool t = false, bool d = false);
 };

@@ -2,11 +2,13 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <iostream>
 #include "player.h"
 
 namespace interpreter
 {
-    static std::string toLowerCasePBV(std::string);
-    static void toLowerCasePBR(std::string&);
-    static char interpret(std::string);
+    std::string toLowerCasePBV(std::string);
+    void toLowerCasePBR(std::string&);
+    std::string userInput();
+    char interpret(std::string);
 }

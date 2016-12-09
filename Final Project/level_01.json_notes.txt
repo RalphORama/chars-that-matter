@@ -1,0 +1,7 @@
+NOTE: This is in a separate file because JSON doesn't allow comments.
+
+The x and y coordinates are swapped in this setup,
+	i.e. x value indicates vertical value, y horizontal.
+Also, the "origin" of the level grid (0, 0) is in the top left,
+	rather than the bottom left.
+This situation exists because of an OSI model layer 8 exception.

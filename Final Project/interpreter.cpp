@@ -16,10 +16,13 @@ namespace interpreter
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
     }
 
-    /*
-    What direction: west
-    (Error.NONE)
-    */
+    std::string userInput()
+    {
+        std::string temp;
+        std::cout << " > ";
+        std::cin >> temp;
+        return temp;
+    }
 
     char interpret(std::string input)
     {
