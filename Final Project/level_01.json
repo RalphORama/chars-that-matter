@@ -1,4 +1,5 @@
 {
+  "numrooms": 15,
   "winroom": {
     "x": 4,
     "y": 4
@@ -8,7 +9,7 @@
     "y": 2,
     "hastorch": false
   },
-  "room_01": {
+  "room_1": {
     "x": 0,
     "y": 1,
     "flavortext": "An empty room, much like the others you've already seen.",
@@ -18,79 +19,85 @@
     "west": false,
     "toodark": true
   },
-  "room_02": {
+  "room_2": {
     "x": 0,
     "y": 3,
     "flavortext": "You enter a room that is surprisingly clean, given its surroundings.",
     "north": false,
     "east": false,
     "south": true,
-    "west": false
+    "west": false,
+    "toodark": false
   },
-  "room_03": {
+  "room_3": {
     "x": 1,
     "y": 1,
     "flavortext": "As you pass through the passageway into the room, you are confronted by the smell of mold.",
     "north": true,
     "east": true,
     "south": false,
-    "west": false
+    "west": false,
+    "toodark": false
   },
-  "room_04": {
+  "room_4": {
     "x": 1,
     "y": 2,
     "flavortext": "An empty room lit only by a massive fireplace in the north wall.",
     "north": false,
     "east": true,
     "south": true,
-    "west": true
+    "west": true,
+    "toodark": false
   },
-  "room_05": {
+  "room_5": {
     "x": 1,
     "y": 3,
     "flavortext": "An empty room, much like the others you've already seen.",
-    "toodark": true,
     "north": true,
     "east": false,
     "south": true,
-    "west": false
+    "west": false,
+    "toodark": true
   },
-  "room_06": {
+  "room_6": {
     "x": 2,
     "y": 1,
     "flavortext": "An empty room, much like the others you've already seen.",
-    "toodark": true,
     "north": false,
     "east": true,
     "south": true,
-    "west": false
+    "west": false,
+    "toodark": true
   },
-  "room_07": {
+  "room_7": {
     "x": 2,
     "y": 2,
     "flavortext": "A TORCH flickers on the wall, providing light for the room.",
     "north": true,
     "east": false,
     "south": false,
-    "west": true
+    "west": true,
+    "toodark": false
   },
-  "room_08": {
+  "room_8": {
     "x": 2,
     "y": 3,
     "flavortext": "An empty room, much like the others you've already seen.",
     "north": false,
     "east": false,
     "south": true,
-    "west": false
+    "west": false,
+    "toodark": false
   },
-  "room_09": {
+  "room_9": {
     "x": 3,
     "y": 0,
     "flavortext": "An empty room, much like the others you've already seen.",
     "north": false,
     "east": true,
     "south": false,
-    "west": false
+    "west": false,
+    "toodark": false
   },
   "room_10": {
     "x": 3,
@@ -99,7 +106,8 @@
     "north": true,
     "east": true,
     "south": false,
-    "west": true
+    "west": true,
+    "toodark": false
   },
   "room_11": {
     "x": 3,
@@ -108,7 +116,8 @@
     "north": false,
     "east": true,
     "south": true,
-    "west": true
+    "west": true,
+    "toodark": false
   },
   "room_12": {
     "x": 3,
@@ -117,7 +126,8 @@
     "north": true,
     "east": false,
     "south": false,
-    "west": true
+    "west": true,
+    "toodark": false
   },
   "room_13": {
     "x": 4,
@@ -126,7 +136,8 @@
     "north": true,
     "east": true,
     "south": false,
-    "west": false
+    "west": false,
+    "toodark": false
   },
   "room_14": {
     "x": 4,
@@ -135,7 +146,8 @@
     "north": false,
     "east": true,
     "south": false,
-    "west": true
+    "west": true,
+    "toodark": false
   },
   "room_15": {
     "x": 4,
@@ -144,6 +156,7 @@
     "north": false,
     "east": false,
     "south": false,
-    "west": true
+    "west": true,
+    "toodark": false
   }
 }

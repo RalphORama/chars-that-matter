@@ -20,7 +20,7 @@ namespace interpreter
     {
         std::string temp;
         std::cout << " > ";
-        std::cin >> temp;
+        std::getline(std::cin, temp);
         return temp;
     }
 
