@@ -2,6 +2,11 @@
 
 namespace interpreter
 {
+    /// <summary>
+    /// Takes a string and transforms it to lower case
+    /// </summary>
+    /// <param name="str">The string to transform</param>
+    /// <returns>The string in lower case</returns>
     std::string toLowerCasePBV(std::string str)
     {
         std::string temp = str;
@@ -10,12 +15,20 @@ namespace interpreter
         return temp;
     }
 
+    /// <summary>
+    /// Transforms a string to lower case in-place
+    /// </summary>
+    /// <param name="str">The string to transform</param>
     void toLowerCasePBR(std::string &str)
     {
         // Source: http://stackoverflow.com/a/313990
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
     }
 
+    /// <summary>
+    /// Standardized prompt for getting user input
+    /// </summary>
+    /// <returns>Text that the user entered</returns>
     std::string userInput()
     {
         std::string temp;
@@ -27,6 +40,7 @@ namespace interpreter
     char interpret(std::string input)
     {
         toLowerCasePBR(input);
+        // Directional input
         if (input == "north" || input == "east" || input == "south" || input == "west")
         {
             if (input == "north") {
@@ -43,17 +57,19 @@ namespace interpreter
             }
 
         }
+        // Asking for help
         else if (input == "help")
         {
             return 'h';
         }
+        // Trying to get an item
         else if (input == "take")
         {
             return 't';
         }
+        // Undefined input
         else
         {
-            // A space indicates an error interpreting user input, I dunno
             return ' ';
         }
     }

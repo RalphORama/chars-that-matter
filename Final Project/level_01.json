@@ -32,7 +32,7 @@
   "room_3": {
     "x": 1,
     "y": 1,
-    "flavortext": "As you pass through the passageway into the room, you are confronted by the smell of mold.",
+    "flavortext": "As you exit the passageway into the room, you are confronted by the smell of mold.",
     "north": true,
     "east": true,
     "south": false,
