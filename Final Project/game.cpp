@@ -2,8 +2,11 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+
 #include "json.hpp"
 #include "wordWrap.h"
+
+#include "settings.h"
 #include "room.h"
 #include "player.h"
 #include "interpreter.h"
@@ -11,17 +14,11 @@
 // Namespace declarations
 using namespace std;
 using json = nlohmann::json;
+using intention = interpreter::intention;
+using grabbedItem = interpreter::grabbedItem;
 
-// Constant declarations
-const string LEVEL_FILE_NAME = "level_01.json";
-const string HELPTEXT = "Available commands:\n\
-  north, east, south, west: Move in specified direction.\n\
-  look: Inspect the room you're in.\n\
-  take <item>: Take an item.\n\
-  help: Displays this message.\n\
-  quit: Quit the game.";
-const int LEVEL_WIDTH = 5, LEVEL_HEIGHT = 5;
-const int MAX_USERINPUT_WORDS = 3;
+// Function prototypes
+bool tryMove(room, room**, player, std::string);
 
 int main(void)
 {
@@ -29,7 +26,6 @@ int main(void)
     ifstream levelFile(LEVEL_FILE_NAME);
     json levelJSON;
     room dungeon[LEVEL_WIDTH][LEVEL_HEIGHT];
-    string lastInput;
 	int numrooms;
 
     // Import our level data into our JSON object
@@ -59,8 +55,8 @@ int main(void)
     // END LEVEL GENERATION CODE
 
     // Create our player
-    player ply(
-        levelJSON["player"]["x"], levelJSON["player"]["y"], "", levelJSON["player"]["hastorch"]);
+    player ply(levelJSON["player"]["x"], levelJSON["player"]["y"], "",
+        levelJSON["player"]["hastorch"]);
 
     // Ask the player to name themselves before we start the game loop
     WordWrap::OutputText("All of a sudden, you're awake. The smell of damp surrounds you, and you can barely see in the low light.");
@@ -69,68 +65,114 @@ int main(void)
 
     WordWrap::OutputText("And so, " + ply.name + " your journey begins." + "\n");
 
+    // ------------------------------------------------------------------------
     // BEGIN MAIN GAME LOOP
     do
     {
         // Set the current room so we can access its properties
         room currentRoom = dungeon[ply.x][ply.y];
+        string* userInput = interpreter::splitSentence(interpreter::userInput());
 
-        // Get user input and split it up into words
-        // Source: http://stackoverflow.com/a/16029565
-        lastInput = interpreter::userInput();
-        string words[MAX_USERINPUT_WORDS];
-        stringstream wordStream(lastInput);
-        for (int i = 0; i < MAX_USERINPUT_WORDS; i++)
+        switch (interpreter::interpret(userInput[0]))
         {
-            if (wordStream.good())
-            {
-                wordStream >> words[i];
-                words[i] = interpreter::toLowerCasePBV(words[i]);
-            }
-        }
-
-        if (words[0] == "north" || words[0] == "east" || words[0] == "south" || words[0] == "west")
-        {
-            if (words[0] == "north")
-            {
-
-            }
-        }
-        else if (words[0] == "help")
-        {
+        case intention::HELP:
             WordWrap::OutputText(HELPTEXT);
-        }
-        else if (words[0] == "look")
-        {
-            WordWrap::OutputText(currentRoom.flavorText);
-        }
-        else if (words[0] == "take")
-        {
-            if (words[1] == "torch" && currentRoom.tooDark == false)
+            break;
+        case intention::QUIT:
+            WordWrap::OutputText("Do you really want to quit? (y/n)");
+            if (interpreter::userInput() == "y")
+                ply.dead = 1;
+            break;
+        case intention::ITEM:
+            // Check which item the user grabbed
+            switch (interpreter::getItem(userInput[1]))
             {
-                WordWrap::OutputText("You grab a torch off the wall to help light your journey.");
+            case grabbedItem::TORCH:
+                if (!ply.hasTorch)
+                {
+                    ply.hasTorch = true;
+                    WordWrap::OutputText("You picked up a torch.");
+                }
+                else
+                {
+                    WordWrap::OutputText("You already had a torch.");
+                }
+                break;
+            default:
+                WordWrap::OutputText("That item doesn't exist.");
+                break;
             }
-            // TODO: Handle other items
-            else
-            {
-                WordWrap::OutputText("There's no " + words[1] + " in this room.");
-                // "That item doesn't exist!"
-            }
+            break;
+        case intention::MOVE:
+            tryMove(currentRoom, dungeon, ply, userInput[1]);
+            break;
+        default:
+            WordWrap::OutputText("I'm not sure what you mean by " + userInput[0]);
+            break;
         }
-        else if (words[0] == "quit")
-        {
-            WordWrap::OutputText("You feel a splitting pain in your chest and keel over on the spot. Your journey ends here.");
-            ply.dead = true;
-        }
-        else
-        {
-            WordWrap::OutputText("I'm not sure what you mean by that.");
-            // Undefined input
-        }
-
     }
     while (ply.dead == false);
     // END MAIN GAME LOOP
+    // ------------------------------------------------------------------------
 
     return 0;
+}
+
+bool tryMove(room currentRoom, room dungeon[LEVEL_WIDTH][LEVEL_HEIGHT], player ply, string direction)
+{
+    int newX = ply.x;
+    int newY = ply.y;
+
+    if (direction == "north")
+    {
+        newX--;
+        if (newX < 0)
+        {
+            // Error
+        }
+        else
+        {
+            // Move
+        }
+    }
+    else if (direction == "east")
+    {
+        newY++;
+        if (newY > LEVEL_WIDTH - 1)
+        {
+            // Error
+        }
+        else
+        {
+            // Move
+        }
+    }
+    else if (direction == "south")
+    {
+        newX++;
+        if (newX > LEVEL_WIDTH - 1)
+        {
+            // Error
+        }
+        else
+        {
+            // Move
+        }
+    }
+    else if (direction == "west")
+    {
+        newY--;
+        if (newY < 0)
+        {
+            // Error
+        }
+        else
+        {
+            // Move
+        }
+    }
+    else
+    {
+        // Some error or smth
+    }
 }

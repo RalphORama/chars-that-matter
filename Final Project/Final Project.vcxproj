@@ -153,6 +153,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="player.h" />
     <ClInclude Include="room.h" />
+    <ClInclude Include="settings.h" />
     <ClInclude Include="wordWrap.h" />
   </ItemGroup>
   <ItemGroup>

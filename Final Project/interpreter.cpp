@@ -37,40 +37,88 @@ namespace interpreter
         return temp;
     }
 
-    char interpret(std::string input)
+    /// <summary>
+    /// Takes a sentence and splits it into an array of words
+    /// Source: http://stackoverflow.com/a/16029565
+    /// </summary>
+    /// <param name="sentence">The sentence to split</param>
+    /// <returns>A pointer to the array of words that were in the sentence</returns>
+    std::string* splitSentence(std::string sentence)
     {
-        toLowerCasePBR(input);
-        // Directional input
-        if (input == "north" || input == "east" || input == "south" || input == "west")
-        {
-            if (input == "north") {
-                return 'n';
-            }
-            else if (input == "east") {
-                return 'e';
-            }
-            else if (input == "south") {
-                return 's';
-            }
-            else {
-                return 'w';
-            }
+        std::string words[MAX_USERINPUT_WORDS];
+        std::stringstream wordStream(sentence);
 
-        }
-        // Asking for help
-        else if (input == "help")
+        for (int i = 0; i < MAX_USERINPUT_WORDS; i++)
         {
-            return 'h';
+            if (wordStream.good())
+            {
+                wordStream >> words[i];
+                words[i] = toLowerCasePBV(words[i]);
+            }
         }
-        // Trying to get an item
-        else if (input == "take")
+
+        return words;
+    }
+
+    /// <summary>
+    /// Given the first word of a user's input sentence, interpret what they want
+    /// </summary>
+    /// <param name="userInput">The first word of the user's input</param>
+    /// <returns>An enum declaring what the user wants to do</returns>
+    intention interpret(std::string userInput)
+    {
+        if (userInput == "north" || userInput == "east" ||
+            userInput == "south" || userInput == "west")
         {
-            return 't';
+            return intention::MOVE;
         }
-        // Undefined input
+        else if (userInput == "help")
+        {
+            return intention::HELP;
+        }
+        else if (userInput == "look")
+        {
+            return intention::LOOK;
+        }
+        else if (userInput == "take")
+        {
+            return intention::ITEM;
+        }
+        else if (userInput == "quit")
+        {
+            return intention::QUIT;
+        }
         else
         {
-            return ' ';
+            return intention::UNDEFINED;
         }
+    }
+
+    /// <summary>
+    /// Checks to see if the player can get an item.
+    /// This is really stupid as of right now, but could be expanded upon in the future.
+    /// </summary>
+    /// <param name="item">The item the player wants</param>
+    /// <returns>Whether the player can get that item</returns>
+    grabbedItem getItem(std::string item)
+    {
+        if (item == "torch")
+            return grabbedItem::TORCH;
+        else
+            return grabbedItem::UNDEFINED;
+    }
+
+    /// <summary>
+    /// Checks to see if the next room is too dark for the player to enter
+    /// </summary>
+    /// <param name="hasTorch">Whether the player has a torch</param>
+    /// <param name="nextRoom">The room the player is trying to enter</param>
+    /// <returns>True if the next room is too dark, false if it isn't</returns>
+    bool isNextRoomTooDark(bool hasTorch, room nextRoom)
+    {
+        if (hasTorch)
+            return true;
+        else
+            return nextRoom.tooDark;
     }
 }
