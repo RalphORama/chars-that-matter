@@ -26,6 +26,14 @@ int main(void)
     room dungeon[LEVEL_WIDTH][LEVEL_HEIGHT];
 	int numrooms;
 
+    if (levelFile.fail())
+    {
+        WordWrap::OutputText("ERROR! level_01.json not found! Copy it to the exe directory and re-run the program.");
+        WordWrap::OutputText("Press enter to exit...");
+        cin.ignore();
+        return 1;
+    }
+
     // Import our level data into our JSON object
     levelFile >> levelJSON;
     levelFile.close();
@@ -45,7 +53,7 @@ int main(void)
             We have to define tooDark for each room because the JSON interpreter
             doesn't like it when we try to reference a key that doesn't have a value.
         */
-        dungeon[x][y] = room(levelJSON[currentRoom]["flavortext"], "",
+        dungeon[x][y] = room(levelJSON[currentRoom]["flavortext"], levelJSON[currentRoom]["itemtext"],
             levelJSON[currentRoom]["north"], levelJSON[currentRoom]["east"],
             levelJSON[currentRoom]["south"], levelJSON[currentRoom]["west"],
             levelJSON[currentRoom]["toodark"]);

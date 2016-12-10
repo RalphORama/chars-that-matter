@@ -12,7 +12,7 @@
   "room_1": {
     "x": 0,
     "y": 1,
-    "flavortext": "An empty room, much like the others you've already seen.",
+    "flavortext": "The roof's fallen in here, blocking off almost every exit.",
     "itemtext": "",
     "north": false,
     "east": false,
@@ -23,7 +23,7 @@
   "room_2": {
     "x": 0,
     "y": 3,
-    "flavortext": "You enter a room that is surprisingly clean, given its surroundings.",
+    "flavortext": "The room is surprisingly clean, given its neighbors.",
     "itemtext": "",
     "north": false,
     "east": false,
@@ -122,7 +122,7 @@
   "room_11": {
     "x": 3,
     "y": 2,
-    "flavortext": "The room you worke up in. Not much has changed.",
+    "flavortext": "The room you woke up in. Not much has changed.",
     "itemtext": "",
     "north": false,
     "east": true,
