@@ -10,16 +10,17 @@
 
 namespace interpreter
 {
-    enum intention {
+    enum class intention{
         UNDEFINED,  // Undefined input
         HELP,       // User asked for info about available commands
         QUIT,       // User wants to quit
         LOOK,       // User wants a description of the room they're in
         ITEM,       // User wants to pick up an item
-        MOVE        // User wants to move to another room
+        MOVE,       // User wants to move to another room
+        ASCEND      // Climb the staircase to win the game
     };
 
-    enum grabbedItem {
+    enum class grabbedItem {
         UNDEFINED,
         TORCH
     };
@@ -27,8 +28,10 @@ namespace interpreter
     std::string toLowerCasePBV(std::string);
     void toLowerCasePBR(std::string&);
     std::string userInput();
-    std::string* splitSentence(std::string);
+    void splitSentence(std::string, std::string[]);
     intention interpret(std::string);
     grabbedItem getItem(std::string);
-    bool isNextRoomTooDark(player, room);
+    bool isNextRoomTooDark(bool, room);
+    bool isValidRoom(room);
+    std::string printExits(room);
 }

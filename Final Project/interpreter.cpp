@@ -43,9 +43,9 @@ namespace interpreter
     /// </summary>
     /// <param name="sentence">The sentence to split</param>
     /// <returns>A pointer to the array of words that were in the sentence</returns>
-    std::string* splitSentence(std::string sentence)
+    void splitSentence(std::string sentence, std::string words[MAX_USERINPUT_WORDS])
     {
-        std::string words[MAX_USERINPUT_WORDS];
+        // std::string words[MAX_USERINPUT_WORDS];
         std::stringstream wordStream(sentence);
 
         for (int i = 0; i < MAX_USERINPUT_WORDS; i++)
@@ -57,7 +57,7 @@ namespace interpreter
             }
         }
 
-        return words;
+        // return words;
     }
 
     /// <summary>
@@ -84,7 +84,11 @@ namespace interpreter
         {
             return intention::ITEM;
         }
-        else if (userInput == "quit")
+        else if (userInput == "ascend")
+        {
+            return intention::ASCEND;
+        }
+        else if (userInput == "quit" || userInput == "exit")
         {
             return intention::QUIT;
         }
@@ -120,5 +124,41 @@ namespace interpreter
             return true;
         else
             return nextRoom.tooDark;
+    }
+
+    bool isValidRoom(room r)
+    {
+        // A valid room will have at least one exit
+        return (r.north || r.east || r.south || r.west);
+    }
+
+    std::string printExits(room r)
+    {
+        std::stringstream output;
+        output << "You could go ";
+
+        if (r.north)
+            output << "north";
+        if (r.east)
+        {
+            if (r.north)
+                output << ", or ";
+            output << "east";
+        }
+        if (r.south)
+        {
+            if (r.north || r.east)
+                output << ", or ";
+            output << "south";
+        }
+        if (r.west)
+        {
+            if (r.north || r.east || r.south)
+                output << ", or ";
+            output << "west";
+        }
+        output << ".";
+
+        return output.str();
     }
 }

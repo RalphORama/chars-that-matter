@@ -166,7 +166,7 @@
   "room_15": {
     "x": 4,
     "y": 4,
-    "flavortext": "As you emerge from the passageway, you're temporarily blinded by sunlight shining down a stairwell. You proceed upwards, onto new journeys.",
+    "flavortext": "Light shines down the staircase in this room. You could ascend it.",
     "itemtext": "",
     "north": false,
     "east": false,

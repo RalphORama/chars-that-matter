@@ -16,9 +16,7 @@ using namespace std;
 using json = nlohmann::json;
 using intention = interpreter::intention;
 using grabbedItem = interpreter::grabbedItem;
-
-// Function prototypes
-bool tryMove(room, room**, player, std::string);
+using movement = player::movement;
 
 int main(void)
 {
@@ -71,19 +69,28 @@ int main(void)
     {
         // Set the current room so we can access its properties
         room currentRoom = dungeon[ply.x][ply.y];
-        string* userInput = interpreter::splitSentence(interpreter::userInput());
+        string userInput[MAX_USERINPUT_WORDS];
+
+        WordWrap::OutputText(interpreter::printExits(currentRoom));
+
+        interpreter::splitSentence(interpreter::userInput(), userInput);
 
         switch (interpreter::interpret(userInput[0]))
         {
         case intention::HELP:
+        {
             WordWrap::OutputText(HELPTEXT);
             break;
-        case intention::QUIT:
+        }
+        case intention::QUIT: 
+        {
             WordWrap::OutputText("Do you really want to quit? (y/n)");
             if (interpreter::userInput() == "y")
                 ply.dead = 1;
             break;
-        case intention::ITEM:
+        }
+        case intention::ITEM: 
+        {
             // Check which item the user grabbed
             switch (interpreter::getItem(userInput[1]))
             {
@@ -103,76 +110,71 @@ int main(void)
                 break;
             }
             break;
+        }
         case intention::MOVE:
-            tryMove(currentRoom, dungeon, ply, userInput[1]);
+        {
+            movement plyMovement = ply.move(currentRoom, dungeon, ply, userInput[0]);
+            if (plyMovement != movement::NONE)
+            {
+                switch (plyMovement)
+                {
+                case movement::NORTH:
+                    ply.x -= 1;
+                    break;
+                case movement::EAST:
+                    ply.y += 1;
+                    break;
+                case movement::SOUTH:
+                    ply.x += 1;
+                    break;
+                case movement::WEST:
+                    ply.y -= 1;
+                    break;
+                default:
+                    break;
+                }
+
+                WordWrap::OutputText("You go " + userInput[0]);
+                WordWrap::OutputText(dungeon[ply.x][ply.y].flavorText);
+            }
+            else
+            {
+                WordWrap::OutputText("You cannot go that direction!");
+            }
             break;
+        }
+        case intention::LOOK:
+        {
+            WordWrap::OutputText(currentRoom.flavorText);
+            break;
+        }
+        case intention::ASCEND:
+        {
+            int winX = levelJSON["winroom"]["x"], winY = levelJSON["winroom"]["y"];
+            
+            if (ply.x == winX && ply.y == winY)
+            {
+                WordWrap::OutputText("You ascend the staircase, shielding your eyes from the light.");
+                WordWrap::OutputText("Unsure of what awaits you at the surface, you emerge, ready to take on whatever adventure lies ahead.");
+                ply.dead = true;
+            }
+
+            break;
+        }
         default:
+        {
             WordWrap::OutputText("I'm not sure what you mean by " + userInput[0]);
             break;
+        }
         }
     }
     while (ply.dead == false);
     // END MAIN GAME LOOP
     // ------------------------------------------------------------------------
 
+    // Ending stuff
+    WordWrap::OutputText("Press enter to exit...");
+    // Just read garbage, wait for enter key
+    cin.ignore();
     return 0;
-}
-
-bool tryMove(room currentRoom, room dungeon[LEVEL_WIDTH][LEVEL_HEIGHT], player ply, string direction)
-{
-    int newX = ply.x;
-    int newY = ply.y;
-
-    if (direction == "north")
-    {
-        newX--;
-        if (newX < 0)
-        {
-            // Error
-        }
-        else
-        {
-            // Move
-        }
-    }
-    else if (direction == "east")
-    {
-        newY++;
-        if (newY > LEVEL_WIDTH - 1)
-        {
-            // Error
-        }
-        else
-        {
-            // Move
-        }
-    }
-    else if (direction == "south")
-    {
-        newX++;
-        if (newX > LEVEL_WIDTH - 1)
-        {
-            // Error
-        }
-        else
-        {
-            // Move
-        }
-    }
-    else if (direction == "west")
-    {
-        newY--;
-        if (newY < 0)
-        {
-            // Error
-        }
-        else
-        {
-            // Move
-        }
-    }
-    else
-    {
-        // Some error or smth
-    }
 }
